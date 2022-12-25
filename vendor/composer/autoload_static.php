@@ -539,6 +539,7 @@ class ComposerStaticInita798f9bc1faf830d39859fd55b866368
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\QueryBuilder' => __DIR__ . '/../..' . '/app/QueryBuilder.php',
         'App\\QueryFilter' => __DIR__ . '/../..' . '/app/QueryFilter.php',
         'App\\Role' => __DIR__ . '/../..' . '/app/Role.php',
         'App\\Skill' => __DIR__ . '/../..' . '/app/Skill.php',
