@@ -17,6 +17,8 @@ class UserFilter extends QueryFilter
             'skills' => 'array|exists:skills,id',
             'from' => 'date_format:d/m/Y',
             'to' => 'date_format:d/m/Y',
+            'order' => 'in:first_name,email,created_at',
+            'direction' => 'in:asc,desc',
         ];
     }
 
@@ -59,6 +61,16 @@ class UserFilter extends QueryFilter
     {
         $date = Carbon::createFromFormat('d/m/Y' , $date);
         return $query->whereDate('created_at' , '<=' , $date);
+    }
+
+    public function order($query , $value)
+    {
+        return $query->orderBy($value , $this->valid['direction'] ?? 'asc');
+    }
+
+    public function direction($query , $value)
+    {
+
     }
 
 }

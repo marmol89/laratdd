@@ -18,10 +18,8 @@ class UserController extends Controller
     public function index(UserFilter $userFilter , Sortable $sortable)
     {
         $users = User::query()
-            ->when(request()->routeIs('users.trashed'), function ($query) {
-                $query->onlyTrashed();
-            })
             ->with('team','skills','profile.profession')
+            ->onlyTrashedIf(request()->routeIs('users.trashed'))
             ->when(request('team'), function ($query, $team) {
                 if ($team === 'with_team') {
                     $query->has('team');
@@ -29,12 +27,8 @@ class UserController extends Controller
                     $query->doesntHave('team');
                 }
             })
-            ->filterBy($userFilter,request()->all(['state', 'role', 'search' , 'skills' , 'from' , 'to']))
-            ->when(request('order'), function ($query) {
-                $query->orderBy(request('order'), request('direction', 'asc'));
-            }, function ($query) {
-                $query->orderByDesc('created_at');
-            })
+            ->filterBy($userFilter, request()->only(['state', 'role', 'search', 'skills', 'from', 'to', 'order', 'direction']))
+            ->orderByDesc('created_at')
             ->paginate();
 
         $users->appends($userFilter->valid());
