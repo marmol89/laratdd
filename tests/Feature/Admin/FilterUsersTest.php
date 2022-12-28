@@ -127,25 +127,25 @@ class FilterUsersTest extends TestCase
     function filter_users_created_to_date()
     {
         $newestUser = factory(User::class)->create([
-            'created_at' => '2020-10-02 12:00:00'
+            'created_at' => '2020-10-02 12:00:00',
         ]);
         $oldestUser = factory(User::class)->create([
-            'created_at' => '2020-09-29 12:00:00'
+            'created_at' => '2020-09-29 12:00:00',
         ]);
         $newUser = factory(User::class)->create([
-            'created_at' => '2020-10-01 00:00:00'
+            'created_at' => '2020-10-01 00:00:00',
         ]);
         $oldUser = factory(User::class)->create([
-            'created_at' => '2020-09-30 23:59:59'
+            'created_at' => '2020-09-30 23:59:59',
         ]);
-
-        $response = $this->get("usuarios?to=30/9/2020");
+        $response = $this->get('/usuarios?to=30/09/2020');
 
         $response->assertOk();
-        $response->assertViewCollection('users')
+
+        $response-> assertViewCollection('users')
+            ->contains($oldestUser)
             ->contains($oldUser)
-            ->contains($oldestUser);
-            /**->notContains($newUser)
-            ->notContains($newestUser);**/
+            ->notContains($newestUser )
+            ->notContains($newUser);
     }
 }
