@@ -107,14 +107,14 @@ class ListUsersTest extends TestCase
         factory(User::class)->create(['first_name' => 'Richard Roe']);
         factory(User::class)->create(['first_name' => 'Jane Doe']);
 
-        $this->get('usuarios?order=first_name&direction=asc')
+        $this->get('usuarios?order=first_name')
             ->assertSeeInOrder([
                 'Jane Doe',
                 'John Doe',
                 'Richard Roe'
             ]);
 
-        $this->get('usuarios?order=first_name&direction=desc')
+        $this->get('usuarios?order=first_name-desc')
             ->assertSeeInOrder([
                 'Richard Roe',
                 'John Doe',
@@ -129,14 +129,14 @@ class ListUsersTest extends TestCase
         factory(User::class)->create(['email' => 'richard.roe@example.com']);
         factory(User::class)->create(['email' => 'jane.doe@example.com']);
 
-        $this->get('usuarios?order=email&direction=asc')
+        $this->get('usuarios?order=email')
             ->assertSeeInOrder([
                 'jane.doe@example.com',
                 'john.doe@example.com',
                 'richard.roe@example.com'
             ]);
 
-        $this->get('usuarios?order=email&direction=desc')
+        $this->get('usuarios?order=email-desc')
             ->assertSeeInOrder([
                 'richard.roe@example.com',
                 'john.doe@example.com',
@@ -151,14 +151,14 @@ class ListUsersTest extends TestCase
         factory(User::class)->create(['email' => 'jane.doe@example.com', 'created_at' => now()->subDays(5)]);
         factory(User::class)->create(['email' => 'richard.roe@example.com', 'created_at' => now()->subDays(3)]);
 
-        $this->get('usuarios?order=created_at&direction=asc')
+        $this->get('usuarios?order=date')
             ->assertSeeInOrder([
                 'jane.doe@example.com',
                 'richard.roe@example.com',
                 'john.doe@example.com',
             ]);
 
-        $this->get('usuarios?order=created_at&direction=desc')
+        $this->get('usuarios?order=date-desc')
             ->assertSeeInOrder([
                 'john.doe@example.com',
                 'richard.roe@example.com',
@@ -173,36 +173,19 @@ class ListUsersTest extends TestCase
         factory(User::class)->create(['email' => 'jane.doe@example.com', 'created_at' => now()->subDays(5)]);
         factory(User::class)->create(['email' => 'richard.roe@example.com', 'created_at' => now()->subDays(3)]);
 
-        $this->get('usuarios?order=id&direction=asc')
+        $this->get('usuarios?order=id')
             ->assertSeeInOrder([
                 'john.doe@example.com',
                 'richard.roe@example.com',
                 'jane.doe@example.com',
             ]);
 
-        $this->get('usuarios?order=column_invalid&direction=desc')
+        $this->get('usuarios?order=column_invalid-desc')
             ->assertOk()
             ->assertSeeInOrder([
                 'john.doe@example.com',
                 'richard.roe@example.com',
                 'jane.doe@example.com',
             ]);
-    }
-
-    /** @test */
-    public function invalid_direction_query_data_is_ignored_and_the_default_direction_is_used_instead()
-    {
-        factory(User::class)->create(['email' => 'john.doe@example.com']);
-        factory(User::class)->create(['email' => 'jane.doe@example.com']);
-        factory(User::class)->create(['email' => 'richard.roe@example.com']);
-
-        $this->get('usuarios?order=email&direction=down')
-            ->assertOk()
-            ->assertSeeInOrder([
-                'jane.doe@example.com',
-                'john.doe@example.com',
-                'richard.roe@example.com',
-            ]);
-
     }
 }
