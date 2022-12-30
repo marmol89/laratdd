@@ -180,12 +180,28 @@ class ListUsersTest extends TestCase
                 'jane.doe@example.com',
             ]);
 
-        $this->get('usuarios?order=column_invalid-desc')
+        $this->get('usuarios?order=invalid_column')
             ->assertOk()
             ->assertSeeInOrder([
                 'john.doe@example.com',
                 'richard.roe@example.com',
                 'jane.doe@example.com',
             ]);
+
+        $this->get('usuarios?order=first_name-descendent')
+            ->assertSeeInOrder([
+                'john.doe@example.com',
+                'richard.roe@example.com',
+                'jane.doe@example.com',
+            ]);
+
+        $this->get('usuarios?order=asc-first_name')
+            ->assertSeeInOrder([
+                'john.doe@example.com',
+                'richard.roe@example.com',
+                'jane.doe@example.com',
+            ]);
+
+
     }
 }
