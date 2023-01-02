@@ -16,7 +16,8 @@ class UserFilter extends QueryFilter
         'login' => 'last_login_at'
     ];
 
-    public function getColumnName($alias){
+    public function getColumnName($alias)
+    {
         return $this->aliasses[$alias] ?? $alias;
     }
 
@@ -49,34 +50,32 @@ class UserFilter extends QueryFilter
         return $query->where('active', $state === 'active');
     }
 
-    public function skills($query , $skills)
+    public function skills($query, $skills)
     {
-
         $subquery = DB::table('skill_user as s')
             ->selectRaw('COUNT(s.id)')
-            ->whereColumn('s.user_id' , 'users.id')
-            ->whereIn('skill_id' , $skills);
+            ->whereColumn('s.user_id', 'users.id')
+            ->whereIn('skill_id', $skills);
 
-       return $query->whereQuery($subquery , count($skills));
-
+        return $query->whereQuery($subquery, count($skills));
     }
 
-    public function from($query , $date)
+    public function from($query, $date)
     {
-        $date = Carbon::createFromFormat('d/m/Y' , $date);
+        $date = Carbon::createFromFormat('d/m/Y', $date);
 
-       return $query->whereDate('created_at' , '>=' , $date);
+        return $query->whereDate('created_at', '>=', $date);
     }
 
-    public function to($query , $date)
+    public function to($query, $date)
     {
-        $date = Carbon::createFromFormat('d/m/Y' , $date);
-        return $query->whereDate('created_at' , '<=' , $date);
+        $date = Carbon::createFromFormat('d/m/Y', $date);
+        return $query->whereDate('created_at', '<=', $date);
     }
 
-    public function order($query , $value)
+    public function order($query, $value)
     {
         [$column , $direction] = Sortable::info($value);
-        return $query->orderBy($this->getColumnName($column) , $direction);
+        return $query->orderBy($this->getColumnName($column), $direction);
     }
 }

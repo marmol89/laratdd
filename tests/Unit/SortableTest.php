@@ -19,13 +19,13 @@ class SortableTest extends TestCase
     }
 
     /** @test */
-    public function return_a_css_class_to_indicate_the_column_is_sortable()
+    function return_a_css_class_to_indicate_the_column_is_sortable()
     {
         $this->assertSame('link-sortable', $this->sortable->classes('first_name'));
     }
 
     /** @test */
-    public function return_css_classes_to_indicate_the_column_is_sorted_in_ascendent_order()
+    function return_css_classes_to_indicate_the_column_is_sorted_in_ascendent_order()
     {
         $this->sortable->appends(['order' =>'first_name']);
 
@@ -33,7 +33,7 @@ class SortableTest extends TestCase
     }
 
     /** @test */
-    public function return_css_classes_to_indicate_the_column_is_sorted_in_descendent_order()
+    function return_css_classes_to_indicate_the_column_is_sorted_in_descendent_order()
     {
         $this->sortable->appends(['order' =>'first_name-desc']);
 
@@ -41,7 +41,7 @@ class SortableTest extends TestCase
     }
 
     /** @test */
-    public function builds_a_url_with_sortable_data()
+    function builds_a_url_with_sortable_data()
     {
         $this->assertSame(
             'http://laravel0/demo?order=first_name',
@@ -50,7 +50,7 @@ class SortableTest extends TestCase
     }
 
     /** @test */
-    public function builds_a_url_with_descendent_order_if_the_current_column_matches_the_given_one_and_the_current_direction_is_asc()
+    function builds_a_url_with_descendent_order_if_the_current_column_matches_the_given_one_and_the_current_direction_is_asc()
     {
         $this->sortable->appends(['order' =>'first_name']);
 
@@ -61,7 +61,7 @@ class SortableTest extends TestCase
     }
 
     /** @test */
-    public function appends_query_data_to_the_url()
+    function appends_query_data_to_the_url()
     {
         $this->sortable->appends(['a' => 'parameter' , 'and' => 'another-parameter']);
         $this->assertSame(
@@ -71,12 +71,11 @@ class SortableTest extends TestCase
     }
     /** @test */
 
-    public function gets_the_info_about_the_column_name_and_the_order_direction()
+    function gets_the_info_about_the_column_name_and_the_order_direction()
     {
-        $this->assertSame(['first_name' , 'asc'] , Sortable::info('first_name'));
-        $this->assertSame(['first_name' , 'desc'] , Sortable::info('first_name-desc'));
-        $this->assertSame(['email' , 'asc'] , Sortable::info('email'));
-        $this->assertSame(['email' , 'desc'] , Sortable::info('email-desc'));
+        $this->assertSame(['first_name' , 'asc'], Sortable::info('first_name'));
+        $this->assertSame(['first_name' , 'desc'], Sortable::info('first_name-desc'));
+        $this->assertSame(['email' , 'asc'], Sortable::info('email'));
+        $this->assertSame(['email' , 'desc'], Sortable::info('email-desc'));
     }
-
 }

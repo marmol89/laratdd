@@ -30,7 +30,7 @@ class ListUsersTest extends TestCase
             ->assertSee('Ellie');
     }
 
-    /** @test  */
+    /** @test */
     function it_shows_a_default_page_if_the_users_list_is_empty()
     {
         $this->get('usuarios?empty')
@@ -101,8 +101,9 @@ class ListUsersTest extends TestCase
             ])
             ->assertDontSee('Tercer usuario');
     }
+
     /** @test */
-    public function users_are_ordered_by_name()
+    function users_are_ordered_by_name()
     {
         factory(User::class)->create(['first_name' => 'John Doe']);
         factory(User::class)->create(['first_name' => 'Richard Roe']);
@@ -124,7 +125,7 @@ class ListUsersTest extends TestCase
     }
 
     /** @test */
-    public function users_are_ordered_by_email()
+    function users_are_ordered_by_email()
     {
         factory(User::class)->create(['email' => 'john.doe@example.com']);
         factory(User::class)->create(['email' => 'richard.roe@example.com']);
@@ -146,7 +147,7 @@ class ListUsersTest extends TestCase
     }
 
     /** @test */
-    public function users_are_ordered_by_registration_date()
+    function users_are_ordered_by_registration_date()
     {
         factory(User::class)->create(['email' => 'john.doe@example.com', 'created_at' => now()->subDays(2)]);
         factory(User::class)->create(['email' => 'jane.doe@example.com', 'created_at' => now()->subDays(5)]);
@@ -168,7 +169,7 @@ class ListUsersTest extends TestCase
     }
 
     /** @test */
-    public function invalid_order_query_data_is_ignored_and_the_default_order_is_used_instead()
+    function invalid_order_query_data_is_ignored_and_the_default_order_is_used_instead()
     {
         factory(User::class)->create(['email' => 'john.doe@example.com', 'created_at' => now()->subDays(2)]);
         factory(User::class)->create(['email' => 'jane.doe@example.com', 'created_at' => now()->subDays(5)]);
@@ -205,19 +206,19 @@ class ListUsersTest extends TestCase
     }
 
     /** @test */
-    public function users_are_ordered_by_login_date()
+    function users_are_ordered_by_login_date()
     {
         factory(Login::class)->create([
-           'created_at' => now()->subDays(3),
-           'user_id' => factory(User::class)->create(['first_name' => 'John Doe']) ,
+            'created_at' => now()->subDays(3),
+            'user_id' => factory(User::class)->create(['first_name' => 'John Doe']),
         ]);
         factory(Login::class)->create([
             'created_at' => now()->subDays(),
-            'user_id' => factory(User::class)->create(['first_name' => 'Jane Doe']) ,
+            'user_id' => factory(User::class)->create(['first_name' => 'Jane Doe']),
         ]);
         factory(Login::class)->create([
             'created_at' => now()->subDays(2),
-            'user_id' => factory(User::class)->create(['first_name' => 'Richard Roe']) ,
+            'user_id' => factory(User::class)->create(['first_name' => 'Richard Roe']),
         ]);
 
 

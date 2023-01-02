@@ -16,7 +16,6 @@ class ProfileController extends Controller
             'user' => $user,
             'professions' => Profession::orderBy('title')->get(),
         ]);
-
     }
 
     public function update(Request $request)

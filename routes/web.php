@@ -47,4 +47,3 @@ Route::get('habilidades', 'SkillController@index')
     ->name('skill.index');
 
 Route::get('saludo/{name}/{nickname?}', 'WelcomeUserController');
-

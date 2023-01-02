@@ -10,7 +10,7 @@ class TestCollectionData
 {
     private $collection;
 
-    public function __construct($collection)
+    function __construct($collection)
     {
         if (! $collection instanceof Collection &&
             ! $collection instanceof AbstractPaginator) {
@@ -20,14 +20,14 @@ class TestCollectionData
         $this->collection = $collection;
     }
 
-    public function contains($data)
+    function contains($data)
     {
         PHPUnit::assertTrue($this->collection->contains($data));
 
         return $this;
     }
 
-    public function notContains($data)
+    function notContains($data)
     {
         PHPUnit::assertFalse($this->collection->contains($data));
 

@@ -2,7 +2,8 @@
 
 namespace Tests\Unit;
 
-use App\{User , Login};
+use App\User;
+use App\Login;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -43,10 +44,9 @@ class UserTest extends TestCase
 
         $users = User::withLastLogin()->get();
 
-        $this->assertInstanceOf(Carbon::class , $users->firstWhere('first_name' , 'Joel')->last_login_at);
+        $this->assertInstanceOf(Carbon::class, $users->firstWhere('first_name', 'Joel')->last_login_at);
 
-        $this->assertEquals(Carbon::parse('2020-09-18 12:31:00') , $users->firstWhere('first_name' , 'Joel')->last_login_at);
-        $this->assertEquals(Carbon::parse('2020-09-15 12:01:00') , $users->firstWhere('first_name' , 'Ellie')->last_login_at);
+        $this->assertEquals(Carbon::parse('2020-09-18 12:31:00'), $users->firstWhere('first_name', 'Joel')->last_login_at);
+        $this->assertEquals(Carbon::parse('2020-09-15 12:01:00'), $users->firstWhere('first_name', 'Ellie')->last_login_at);
     }
-
 }

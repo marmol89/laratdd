@@ -10,5 +10,4 @@ class LengthAwarePaginator extends LengthAwarePaginatorAlias
     {
         return $this->query;
     }
-
 }

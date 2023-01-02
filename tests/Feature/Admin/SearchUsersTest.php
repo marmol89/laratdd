@@ -188,5 +188,4 @@ class SearchUsersTest extends TestCase
             ->notContains($joel)
             ->notContains($ellie);
     }
-
 }

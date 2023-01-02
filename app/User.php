@@ -77,8 +77,8 @@ class User extends Authenticatable
         $this->attributes['active'] = $value == 'active';
     }
 
-    public function newQueryFilter(){
+    public function newQueryFilter()
+    {
         return new UserFilter();
     }
-
 }

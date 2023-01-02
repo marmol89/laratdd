@@ -2,7 +2,6 @@
 
 namespace App;
 
-
 class UserQuery extends QueryBuilder
 {
     public function findByEmail($email)
@@ -12,7 +11,7 @@ class UserQuery extends QueryBuilder
     public function withLastLogin()
     {
         $subselect = Login::select('logins.created_at')
-            ->whereColumn('logins.user_id' , 'users.id')
+            ->whereColumn('logins.user_id', 'users.id')
             ->latest()
             ->limit(1);
 
@@ -20,5 +19,4 @@ class UserQuery extends QueryBuilder
             'last_login_at' => $subselect,
         ]);
     }
-
 }

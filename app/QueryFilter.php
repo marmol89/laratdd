@@ -16,7 +16,8 @@ abstract class QueryFilter
         $rules = $this->rules();
 
         $validator = Validator::make(
-            array_intersect_key($filters, $rules), $rules
+            array_intersect_key($filters, $rules),
+            $rules
         );
 
         $this->valid = $validator->valid();
@@ -41,6 +42,6 @@ abstract class QueryFilter
 
     public function valid()
     {
-    return $this->valid;
+        return $this->valid;
     }
 }

@@ -7,7 +7,6 @@ use Illuminate\Contracts\Validation\Rule;
 
 class SortableColumn implements Rule
 {
-
     private $columns;
 
     public function __construct(array $columns)
@@ -24,14 +23,13 @@ class SortableColumn implements Rule
      */
     public function passes($attribute, $value)
     {
-
-        if(! is_string($value)){
+        if (! is_string($value)) {
             return false;
         }
 
         [$column] = Sortable::info($value);
 
-        return in_array($column , $this->columns);
+        return in_array($column, $this->columns);
     }
 
     /**

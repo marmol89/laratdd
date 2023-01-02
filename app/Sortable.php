@@ -16,7 +16,7 @@ class Sortable
     }
     public function classes($column)
     {
-        if($this->isSortingBy($column)) {
+        if ($this->isSortingBy($column)) {
             return 'link-sortable link-sorted-up';
         }
 
@@ -29,7 +29,7 @@ class Sortable
 
     public function url($column)
     {
-        if($this->isSortingBy($column)) {
+        if ($this->isSortingBy($column)) {
             return $this->buildSortableUrl($column .'-desc');
         }
 
@@ -38,12 +38,12 @@ class Sortable
 
     protected function buildSortableUrl($order)
     {
-        return $this->currentUrl . '?' . Arr::query(array_merge($this->query , ['order' => $order]));
+        return $this->currentUrl . '?' . Arr::query(array_merge($this->query, ['order' => $order]));
     }
 
     protected function isSortingBy($column)
     {
-        return Arr::get($this->query ,'order') == $column;
+        return Arr::get($this->query, 'order') == $column;
     }
 
     public function appends(array $query)
@@ -53,9 +53,9 @@ class Sortable
 
     public static function info($order)
     {
-        if (Str::endsWith($order , '-desc')){
-            return [Str::substr($order,0,-5) , 'desc'];
-        }else {
+        if (Str::endsWith($order, '-desc')) {
+            return [Str::substr($order, 0, -5) , 'desc'];
+        } else {
             return [$order , 'asc'];
         }
     }

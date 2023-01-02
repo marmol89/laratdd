@@ -6,12 +6,12 @@ use Illuminate\Support\Facades\DB;
 
 trait DetectRepeatedQueries
 {
-    public function enableQueryLog()
+    function enableQueryLog()
     {
         DB::enableQueryLog();
     }
 
-    public function assertNotRepeatedQueries()
+    function assertNotRepeatedQueries()
     {
         $queries = array_column(DB::getQueryLog(), 'query');
 
@@ -23,12 +23,14 @@ trait DetectRepeatedQueries
 
         foreach ($selects as $select => $amount) {
             $this->assertEquals(
-                1, $amount, "The following SELECT was executed $amount times: \n\n $select"
+                1,
+                $amount,
+                "The following SELECT was executed $amount times: \n\n $select"
             );
         }
     }
 
-    public function flushQueryLog()
+    function flushQueryLog()
     {
         DB::flushQueryLog();
     }

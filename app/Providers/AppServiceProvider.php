@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Blade::component('shared._card', 'card');
 
-        $this->app->bind(LengthAwarePaginator::class , \App\LengthAwarePaginator::class);
+        $this->app->bind(LengthAwarePaginator::class, \App\LengthAwarePaginator::class);
     }
 
     /**

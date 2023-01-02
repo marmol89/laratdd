@@ -1,6 +1,10 @@
 <?php
 
-use App\{Login, Profession, Skill, Team, User};
+use App\Login;
+use App\Profession;
+use App\Skill;
+use App\Team;
+use App\User;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -59,8 +63,8 @@ class UserSeeder extends Seeder
     {
         $user = factory(User::class)->create([
             'team_id' => rand(0, 2) ? null : $this->teams->random()->id,
-            'active' => rand(0,3) ? true : false,
-            'created_at' => now()->subDay(rand(1,90)),
+            'active' => rand(0, 3) ? true : false,
+            'created_at' => now()->subDay(rand(1, 90)),
         ]);
 
         $user->skills()->attach($this->skills->random(rand(0, 7)));
@@ -69,7 +73,7 @@ class UserSeeder extends Seeder
 
         ]);
 
-        factory(Login::class)->times(rand(1,10))->create([
+        factory(Login::class)->times(rand(1, 10))->create([
             'user_id' => $user->id,
         ]);
     }

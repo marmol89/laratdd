@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\{Http\Requests\CreateUserRequest, Http\Requests\UpdateUserRequest, Profession, Skill, Sortable, User};
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Profession;
+use App\Skill;
+use App\Sortable;
+use App\User;
 
 class UserController extends Controller
 {
     public function index(Sortable $sortable)
     {
         $users = User::query()
-            ->with('team','skills','profile.profession')
+            ->with('team', 'skills', 'profile.profession')
             ->withLastLogin()
             ->onlyTrashedIf(request()->routeIs('users.trashed'))
             ->when(request('team'), function ($query, $team) {
@@ -94,5 +99,4 @@ class UserController extends Controller
 
         return redirect()->route('users');
     }
-
 }

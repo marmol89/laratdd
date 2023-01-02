@@ -12,6 +12,4 @@ class Profession extends Model
     {
         return $this->hasMany(UserProfile::class);
     }
-
-
 }

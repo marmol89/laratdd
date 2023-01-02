@@ -11,6 +11,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class FilterUsersTest extends TestCase
 {
     use RefreshDatabase;
+
     /** @test */
     function filter_users_by_state_active()
     {
@@ -73,7 +74,6 @@ class FilterUsersTest extends TestCase
 
     function filter_users_by_skills()
     {
-
         $php = factory(Skill::class)->create(['name' => 'php']);
         $css = factory(Skill::class)->create(['name' => 'css']);
 
@@ -84,7 +84,7 @@ class FilterUsersTest extends TestCase
         $frontenDev->skills()->attach($css);
 
         $fullendDev = factory(User::class)->create();
-        $fullendDev->skills()->attach([$php->id , $css->id]);
+        $fullendDev->skills()->attach([$php->id, $css->id]);
 
         $response = $this->get("usuarios?skills[0]={$php->id}&skills[1]={$css->id}");
 
@@ -142,10 +142,10 @@ class FilterUsersTest extends TestCase
 
         $response->assertOk();
 
-        $response-> assertViewCollection('users')
+        $response->assertViewCollection('users')
             ->contains($oldestUser)
             ->contains($oldUser)
-            ->notContains($newestUser )
+            ->notContains($newestUser)
             ->notContains($newUser);
     }
 }

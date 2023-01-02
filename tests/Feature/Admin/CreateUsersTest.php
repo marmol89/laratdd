@@ -38,7 +38,7 @@ class CreateUsersTest extends TestCase
             ->assertViewHas('professions', function ($professions) use ($profession) {
                 return $professions->contains($profession);
             })
-            ->assertViewHas('skills', function ($skills) use($skillA, $skillB) {
+            ->assertViewHas('skills', function ($skills) use ($skillA, $skillB) {
                 return $skills->contains($skillA) && $skills->contains($skillB);
             });
     }
