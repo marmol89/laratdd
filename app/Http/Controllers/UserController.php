@@ -8,6 +8,7 @@ use App\Profession;
 use App\Skill;
 use App\Sortable;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -96,6 +97,7 @@ class UserController extends Controller
     {
         $user->profile()->delete();
         $user->delete();
+
 
         return redirect()->route('users');
     }
