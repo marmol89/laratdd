@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::component('shared._card', 'card');
+        Blade::aliasComponent('shared._card', 'card');
 
         Paginator::useBootstrap();
 

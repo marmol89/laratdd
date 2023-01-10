@@ -571,7 +571,7 @@ EOF;
      * @param  bool  $escape
      * @return $this
      */
-    public function assertSee($value, $escape = true)
+    public function assertSee($value, $escape = false)
     {
         $value = Arr::wrap($value);
 
